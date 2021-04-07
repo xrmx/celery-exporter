@@ -8,14 +8,14 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 cd /io
 
-for PYBIN in /opt/python/{cp35-cp35m,cp36-cp36m,cp37-cp37m}/bin; do
+for PYBIN in /opt/python/{cp35-cp35m,cp36-cp36m,cp37-cp37m,cp38-cp38m}/bin; do
     export PYTHON_SYS_EXECUTABLE="$PYBIN/python"
 
     "${PYBIN}/pip" install -U setuptools wheel setuptools-rust
     "${PYBIN}/python" setup.py bdist_wheel
 done
 
-PYBIN=/opt/python/cp37-cp37m/bin
+PYBIN=/opt/python/cp38-cp38m/bin
 "${PYBIN}/pip" install auditwheel
 for whl in dist/*.whl; do
     "${PYBIN}/auditwheel" repair "$whl" -w dist/
